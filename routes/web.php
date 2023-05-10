@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +21,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('home.index');
-})->name('home.index');
+// Route::get('/', function () {
+//     return view('home.index');
+// })->name('home.index');
+
+Route::get('/', [DoctorController::class,'index'])->name('home.index');
+Route::get('/doctor/add', [DoctorController::class,'create'])->name('doctor.create');
+Route::post('/doctor/store', [DoctorController::class,'store'])->name('doctor.store');
 
 // Route::get('/home', function() {
 //     return view('home.index');

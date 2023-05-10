@@ -1,37 +1,65 @@
 @extends('layouts.app')
 
-@section('title', 'Home Page | Shop Beta')
+@section('title', 'Home Page | SchemaDoc')
+
+@section('scripts')
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/libraries.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+@endsection
 
 @section('content')
+    <div>
+        <section class="page-title page-title-layout1 bg-overlay">
+            <div class="bg-img"><img src="assets/images/page-titles/7.jpg" alt="background"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                        <h1 class="pagetitle__heading">Providing Care for The Sickest In Community. </h1>
+                        <p class="pagetitle__desc">Medcity has been present in Europe since 1990, offering innovative
+                            solutions,
+                            specializing in medical services for treatment of medical infrastructure.
+                        </p>
+                    </div><!-- /.col-xl-5 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.page-title -->
 
-    <div class="container">
-        @include('components.main_carousel')
+        <section class="team-layout3 pb-40">
+            <div class="container">
+                <a href="{{ route('doctor.create') }}" class="btn btn__primary btn__rounded mb-50">
+                    <span>Add New Doctor</span>
+                    <i class="icon-arrow-right"></i>
+                </a>
+                <div class="row">
+                    @foreach ($doctors as $item)
+                        <div class="col-sm-6 col-md-4 col-lg-4">
+                            <div class="member">
+                                <div class="member__img">
+                                    <img src="{{ asset('storage/' . $item->photo) }}" alt="member img">
+                                </div><!-- /.member-img -->
+                                <div class="member__info">
+                                    <h5 class="member__name"><a href="doctors-single-doctor1.html">{{ $item->name }}</a></h5>
+                                    <p class="member__job">{{ $item->specialization }}</p>
+                                    <p class="member__desc">{{ $item->description }}</p>
+                                </div><!-- /.member-info -->
+                            </div><!-- /.member -->
+                        </div><!-- /.col-lg-4 -->
+                    @endforeach
+                </div> <!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.Team layout 3  -->
 
-        <div class="row">
-            <!-- ini bawaan bs5 untuk mengatur tata letak -->
-            @for ($loop = 1; $loop < 4; $loop++)
-                <div class="col-md-4 col-12 mb-3">
-                    <div class="card">
-                        <div class="row g-0 align-items-center">
-                            <div class="col-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title {{ $loop }}</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="col-4 text-center px-2">
-                                <img src="https://via.placeholder.com/100x100.png/CB997E/333333?text={{ $loop }}" class="img-fluid rounded-circle" alt="...">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endfor
+        <div class="container">
+            @include('includes.footer')
         </div>
-
-        @include('components.category_carousel')
-
-        @include('includes.footer')
     </div>
+@endsection
 
+@section('js')
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 @endsection
